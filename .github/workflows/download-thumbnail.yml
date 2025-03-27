@@ -21,7 +21,7 @@ jobs:
           echo "id=$id" >> "$GITHUB_OUTPUT"
 
       - name: Download thumbnail
-        uses: vipinformatique/yt-preview-downloader@v1.0.0
+        uses: vipinformatique/yt-preview-downloader@v1.0.1
         with:
           url: ${{ github.event.inputs.youtube_url }}
           output: ${{ steps.extract.outputs.id }}.jpg
