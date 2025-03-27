@@ -35,6 +35,9 @@ jobs:
       - name: Generate dynamic issue body
         run: |
           id="${{ steps.extract.outputs.id }}"
+          permissions:
+            issues: write
+
           cat <<EOF > issue.md
           ---
           title: "🎬 YouTube Thumbnail Preview - $id"
