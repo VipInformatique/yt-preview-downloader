@@ -21,13 +21,12 @@ jobs:
           echo "id=$id" >> "$GITHUB_OUTPUT"
 
       - name: Download thumbnail
-        uses: vipinformatique/yt-preview-downloader@v1.0.1
-        with:
-          url: ${{ github.event.inputs.youtube_url }}
-          output: ${{ steps.extract.outputs.id }}.jpg
+        run: |
+          mkdir -p output
+          curl -L -o output/${{ steps.extract.outputs.id }}.jpg "${{ github.event.inputs.youtube_url }}"
 
       - name: Upload thumbnail as artifact
         uses: actions/upload-artifact@v4
         with:
           name: youtube-thumbnail
-          path: ${{ steps.extract.outputs.id }}.jpg
+          path: output/${{ steps.extract.outputs.id }}.jpg
