@@ -1,28 +1,33 @@
-name: Talk Weather (Coqui TTS)
-
 on:
   workflow_dispatch:
     inputs:
       youtube_url:
-      description: 'URL de la vidéo YouTube'
-      required: true
+        description: "YouTube video URL"
+        required: true
+        type: string
 
 jobs:
-  coqui-weather:
+  thumbnail:
     runs-on: ubuntu-latest
-  
+
     steps:
       - uses: actions/checkout@v4
-      
-      -uses: vipinformatique/yt-preview-downloader@v1.0.0
+
+      - name: Extract video ID
+        id: extract
+        run: |
+          url="${{ github.event.inputs.youtube_url }}"
+          id=$(echo "$url" | cut -d '=' -f2)
+          echo "id=$id" >> "$GITHUB_OUTPUT"
+
+      - name: Download thumbnail
+        uses: vipinformatique/yt-preview-downloader@v1.0.0
         with:
           url: ${{ github.event.inputs.youtube_url }}
-          output: '($id).jpg'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          output: ${{ steps.extract.outputs.id }}.jpg
 
-        - name: Télécharger l’audio
+      - name: Upload thumbnail as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: voix-meteo
-          path: ($id).jpg
+          name: youtube-thumbnail
+          path: ${{ steps.extract.outputs.id }}.jpg
