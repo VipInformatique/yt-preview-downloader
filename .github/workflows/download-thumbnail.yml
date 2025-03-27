@@ -17,20 +17,10 @@ jobs:
         uses: vipinformatique/yt-preview-downloader@v1.0.1
         with:
           url: ${{ github.event.inputs.youtube_url }}
-          output: ${{ steps.extract.outputs.id }}.jpg
-
-      - name: Extract video ID
-        id: extract
-        run: |
-          url="${{ github.event.inputs.youtube_url }}"
-          id=$(echo "$url" | cut -d '=' -f2)
-          echo "id=$id" >> "$GITHUB_OUTPUT"
-  
-      - name: Show extracted video ID
-        run: echo "Extracted ID is: ${{ steps.extract.outputs.id }}"
+          output: thumbnail.jpg
 
       - name: Upload thumbnail as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: youtube-thumbnail
-          path: ${{ steps.extract.outputs.id }}.jpg
+          name: thumbnail
+          path: thumbnail.jpg
