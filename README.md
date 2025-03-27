@@ -22,3 +22,4 @@ The purpose of this script is to:
 $ ./yt-thumbnail.sh
 Enter the video URL: https://www.youtube.com/watch?v=SXv9JCCUqXQ
 Video ID is: SXv9JCCUqXQ
+Saved thumbnail as: SXv9JCCUqXQ.jpg
