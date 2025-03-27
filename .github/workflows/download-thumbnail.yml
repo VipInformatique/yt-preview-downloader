@@ -36,9 +36,9 @@ jobs:
         run: |
           id="${{ steps.extract.outputs.id }}"
           cat <<EOF > issue.md
-  
-          ## 🎬 YouTube Thumbnail Preview
-  
+          ---
+          title: "🎬 YouTube Thumbnail Preview - $id"
+          ---
   
           ✅ Miniature générée automatiquement à partir de l'URL fournie :
   
