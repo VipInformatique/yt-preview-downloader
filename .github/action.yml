@@ -1,0 +1,25 @@
+# action.yml
+name: YouTube Thumbnail Downloader
+description: Downloads a YouTube thumbnail from a video URL
+inputs:
+  url:
+    description: 'YouTube video URL'
+    required: true
+    default: ''
+  output:
+    description: 'Output filename'
+    required: false
+    default: ''
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        url="${{ inputs.url }}"
+        id=$(echo "$url" | cut -d '=' -f2)
+        echo "Video ID is: $id"
+        filename="${{ inputs.output }}"
+        if [ -z "$filename" ]; then
+          filename="$id.jpg"
+        fi
+        curl -o "$filename" "https://img.youtube.com/vi/$id/maxresdefault.jpg"
+      shell: bash

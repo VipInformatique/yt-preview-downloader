@@ -13,4 +13,16 @@ jobs:
   
     steps:
       - uses: actions/checkout@v4
-      - name: 
+      
+      -uses: vipinformatique/yt-preview-downloader@v1.0.0
+        with:
+          url: ${{ github.event.inputs.youtube_url }}
+          output: '($id).jpg'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+        - name: Télécharger l’audio
+        uses: actions/upload-artifact@v4
+        with:
+          name: voix-meteo
+          path: ($id).jpg
