@@ -5,6 +5,9 @@ on:
         description: "YouTube video URL"
         required: true
         type: string
+        
+permissions:
+            issues: write
 
 jobs:
   thumbnail:
@@ -35,8 +38,7 @@ jobs:
       - name: Generate dynamic issue body
         run: |
           id="${{ steps.extract.outputs.id }}"
-          permissions:
-            issues: write
+          
 
           cat <<EOF > issue.md
           ---
