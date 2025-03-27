@@ -18,9 +18,16 @@ jobs:
         with:
           url: ${{ github.event.inputs.youtube_url }}
           output: thumbnail.jpg
-
+      
+      - name: Extract video ID
+        id: extract
+        run: |
+          url="${{ github.event.inputs.youtube_url }}"
+          id=$(echo "$url" | cut -d '=' -f2)
+          echo "id=$id" >> "$GITHUB_OUTPUT"    
+        
       - name: Upload thumbnail as artifact
         uses: actions/upload-artifact@v4
         with:
           name: thumbnail
-          path: thumbnail.jpg
+          path: "${{ github.event.inputs.youtube_url }}".jpg
