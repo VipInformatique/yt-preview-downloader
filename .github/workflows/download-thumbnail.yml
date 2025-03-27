@@ -1,0 +1,16 @@
+name: Talk Weather (Coqui TTS)
+
+on:
+  workflow_dispatch:
+    inputs:
+      youtube_url:
+      description: 'URL de la vidéo YouTube'
+      required: true
+
+jobs:
+  coqui-weather:
+    runs-on: ubuntu-latest
+  
+    steps:
+      - uses: actions/checkout@v4
+      - name: 
