@@ -32,13 +32,27 @@ jobs:
           name: thumbnail
           path: thumbnail.jpg
       
-      - name: Create GitHub Issue with Thumbnail
-        uses: peter-evans/create-issue@v5
+      - name: Generate dynamic issue body
+        run: |
+          id="${{ steps.extract.outputs.id }}"
+          cat <<EOF > issue.md
+  
+          ## 🎬 YouTube Thumbnail Preview
+  
+  
+          ✅ Miniature générée automatiquement à partir de l'URL fournie :
+  
+  
+           ![thumbnail](https://img.youtube.com/vi/$id/maxresdefault.jpg)
+  
+  
+           🔗 Lien direct : [https://img.youtube.com/vi/$id/maxresdefault.jpg](https://img.youtube.com/vi/$id/maxresdefault.jpg)
+  
+              
+  
+      - name: Create GitHub Issue (dynamic)
+        uses: JasonEtco/create-an-issue@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          title: "🎬 YouTube Thumbnail Preview"
-          body: |
-            Voici la miniature générée à partir du lien YouTube fourni :
-        
-            ![thumbnail](https://img.youtube.com/vi/${{ steps.extract.outputs.id }}/maxresdefault.jpg)
-        
-            🔗 Lien direct : https://img.youtube.com/vi/${{ steps.extract.outputs.id }}/maxresdefault.jpg
+          filename: issue.md  
