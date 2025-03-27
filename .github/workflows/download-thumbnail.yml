@@ -38,7 +38,7 @@ jobs:
           title: "🎬 YouTube Thumbnail Preview"
           body: |
             Voici la miniature générée à partir du lien YouTube fourni :
-  
+        
             ![thumbnail](https://img.youtube.com/vi/${{ steps.extract.outputs.id }}/maxresdefault.jpg)
-  
-            🔗 Lien direct : [https://img.youtube.com/vi/${{ steps.extract.outputs.id }}/maxresdefault.jpg](https://img.youtube.com/vi/${{ steps.extract.outputs.id }}/maxresdefault.jpg)
+        
+            🔗 Lien direct : https://img.youtube.com/vi/${{ steps.extract.outputs.id }}/maxresdefault.jpg
