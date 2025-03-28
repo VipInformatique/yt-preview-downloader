@@ -40,16 +40,16 @@ jobs:
           id="${{ steps.extract.outputs.id }}"
 
           cat <<EOF > issue.md
----
-title: "🎬 YouTube Thumbnail Preview - $id"
----
+          ---
+          title: "🎬 YouTube Thumbnail Preview - $id"
+          ---
 
-✅ Miniature générée automatiquement à partir de l'URL fournie :
+          ✅ Miniature générée automatiquement à partir de l'URL fournie :
 
-![thumbnail](https://img.youtube.com/vi/$id/maxresdefault.jpg)
+          ![thumbnail](https://img.youtube.com/vi/$id/maxresdefault.jpg)
 
-🔗 Lien direct : [https://img.youtube.com/vi/$id/maxresdefault.jpg](https://img.youtube.com/vi/$id/maxresdefault.jpg)
-EOF
+          🔗 Lien direct : [https://img.youtube.com/vi/$id/maxresdefault.jpg](https://img.youtube.com/vi/$id/maxresdefault.jpg)
+          EOF
 
       
       - name: Create GitHub Issue (dynamic)
