@@ -5,7 +5,7 @@ on:
         description: "YouTube video URL"
         required: true
         type: string
-        
+
 permissions:
             issues: write
 
@@ -61,3 +61,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           filename: issue.md  
+
+              "
