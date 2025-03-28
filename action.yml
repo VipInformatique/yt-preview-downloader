@@ -6,12 +6,17 @@ inputs:
     description: 'YouTube video URL'
     required: true
     # default: ''
+  output:
+    description: 'Output filename'
+    required: false
+    default: ''
 runs:
   using: "composite"
   steps:
     - run: |
         url="${{ inputs.url }}"
         id=$(echo "$url" | cut -d '=' -f2)
+
         filename="${{ inputs.output }}"
         if [ -z "$filename" ]; then
           filename="$id.jpg"
