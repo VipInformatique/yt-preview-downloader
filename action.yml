@@ -6,10 +6,7 @@ inputs:
     description: 'YouTube video URL'
     required: true
     # default: ''
-  output:
-    description: 'Output filename'
-    required: false
-    default: ''
+
 runs:
   using: "composite"
   steps:
