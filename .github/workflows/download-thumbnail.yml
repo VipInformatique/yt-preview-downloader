@@ -7,7 +7,7 @@ on:
         type: string
 
 permissions:
-            issues: write
+  issues: write
 
 jobs:
   thumbnail:
@@ -21,45 +21,39 @@ jobs:
         with:
           url: ${{ github.event.inputs.youtube_url }}
           output: thumbnail.jpg
-      
+
       - name: Extract video ID
         id: extract
         run: |
           url="${{ github.event.inputs.youtube_url }}"
           id=$(echo "$url" | cut -d '=' -f2)
-          echo "id=$id" >> "$GITHUB_OUTPUT"    
-        
+          echo "id=$id" >> "$GITHUB_OUTPUT"
+
       - name: Upload thumbnail as artifact
         uses: actions/upload-artifact@v4
         with:
           name: thumbnail
           path: thumbnail.jpg
-      
+
       - name: Generate dynamic issue body
         run: |
           id="${{ steps.extract.outputs.id }}"
-          
 
           cat <<EOF > issue.md
-          ---
-          title: "🎬 YouTube Thumbnail Preview - $id"
-          ---
-  
-          ✅ Miniature générée automatiquement à partir de l'URL fournie :
-  
-  
-           ![thumbnail](https://img.youtube.com/vi/$id/maxresdefault.jpg)
-  
-  
-           🔗 Lien direct : [https://img.youtube.com/vi/$id/maxresdefault.jpg](https://img.youtube.com/vi/$id/maxresdefault.jpg)
-  
-              
-  
+---
+title: "🎬 YouTube Thumbnail Preview - $id"
+---
+
+✅ Miniature générée automatiquement à partir de l'URL fournie :
+
+![thumbnail](https://img.youtube.com/vi/$id/maxresdefault.jpg)
+
+🔗 Lien direct : [https://img.youtube.com/vi/$id/maxresdefault.jpg](https://img.youtube.com/vi/$id/maxresdefault.jpg)
+EOF
+
       - name: Create GitHub Issue (dynamic)
         uses: JasonEtco/create-an-issue@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          filename: issue.md  
-
-              "
+          filename: issue.md
