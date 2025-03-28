@@ -51,6 +51,7 @@ title: "🎬 YouTube Thumbnail Preview - $id"
 🔗 Lien direct : [https://img.youtube.com/vi/$id/maxresdefault.jpg](https://img.youtube.com/vi/$id/maxresdefault.jpg)
 EOF
 
+      
       - name: Create GitHub Issue (dynamic)
         uses: JasonEtco/create-an-issue@v2
         env:
